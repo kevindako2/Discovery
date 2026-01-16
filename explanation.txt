@@ -1,0 +1,183 @@
+# Guide de Test - Platforme de Reporting Luxdev
+
+## 🚀 Démarrage Rapide
+
+### Prérequis
+- Node.js (version 18 ou supérieure)
+- npm ou pnpm
+
+### Installation des dépendances
+```bash
+npm install
+```
+
+## 🖥️ Lancement du Frontend
+
+### Option 1: Frontend seul (recommandé pour le développement)
+```bash
+npm run dev
+```
+- Le frontend démarre sur http://localhost:5173
+- Interface de développement avec hot-reload
+- Accès aux fonctionnalités frontend complètes
+
+### Option 2: Frontend + Backend ensemble
+```bash
+npm run dev:full
+```
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3001
+- Les deux services démarrent simultanément
+
+## 🔐 Test des Connexions
+
+### 1. Accès à la plateforme
+Ouvrez http://localhost:5173 dans votre navigateur
+
+### 2. Connexion Administrateur
+- Email: admin@luxdev.org
+- Mot de passe: admin123
+- Accès à toutes les fonctionnalités d'administration
+
+### 3. Connexion Partenaire
+- Email: partner@luxdev.org  
+- Mot de passe: partner123
+- Accès à l'espace partenaire
+
+## 🎯 Scénarios de Test
+
+### A. Espace Administration
+
+#### 1. Dashboard Admin
+- Vérifier l'onglet "Vue d'ensemble" avec les statistiques
+- L'onglet "Rapports" doit afficher un indicateur rouge (32 en attente)
+- Navigation entre les différents onglets
+
+#### 2. Création de Format de Rapport
+- Cliquer sur "Formats" dans le dashboard
+- Cliquer sur "Nouveau format" ou utiliser le bouton "Formats" dans le header
+- Remplir le formulaire:
+  * Nom: "Rapport de test"
+  * Description: "Format pour tester"
+  * Ajouter des champs (texte, nombre, date)
+- Sauvegarder et vérifier l'apparition dans la liste
+
+#### 3. Création de Projet
+- Aller dans l'onglet "Projets"
+- Cliquer sur "Nouveau projet"
+- Remplir le formulaire:
+  * Nom: "Projet test"
+  * Description: "Description du projet"
+  * Sélectionner une période
+  * Choisir un format de rapport
+  * Sélectionner des partenaires
+- Sauvegarder et vérifier l'apparition dans la liste
+
+#### 4. Assistant IA
+- Aller dans l'onglet "Assistant IA"
+- Tester les suggestions rapides
+- Simuler une analyse de rapport
+
+#### 5. Paramètres et Compte
+- Cliquer sur l'icône "Settings" pour les paramètres généraux
+- Tester le mode sombre/clair
+- Cliquer sur l'icône "Users" pour le compte utilisateur
+- Vérifier les onglets Profil, Sécurité, Notifications
+
+### B. Espace Partenaire
+
+#### 1. Dashboard Partenaire
+- Vérifier l'affichage des statistiques partenaire
+- Navigation dans les onglets disponibles
+
+#### 2. Soumission de Rapport
+- Tester l'interface de soumission (si disponible)
+- Vérifier l'intégration avec les formats définis
+
+#### 3. Assistant IA Partenaire
+- Tester la génération automatique de rapports
+- Utiliser les suggestions pour partenaires
+
+## 📱 Test Responsive
+
+### Test Mobile
+- Utiliser les outils de développement du navigateur
+- Simuler des écrans mobiles (320px - 768px)
+- Vérifier:
+  * Adaptation du menu
+  * Lisibilité des tableaux
+  * Fonctionnalité des boutons
+
+### Test Desktop
+- Résolutions standards (1920x1080, 1366x768)
+- Vérifier l'espacement et l'agencement
+
+## 🔧 Tests Techniques
+
+### 1. Routing
+- Navigation directe via URL:
+  * http://localhost:5173/admin
+  * http://localhost:5173/partner
+  * http://localhost:5173/admin/projects
+  * http://localhost:5173/admin/report-formats
+  * http://localhost:5173/settings
+  * http://localhost:5173/account
+
+### 2. Stockage Local
+- Vérifier que les projets et formats sont sauvegardés dans localStorage
+- Tester la persistance des données après rafraîchissement
+
+### 3. Composants UI
+- Vérifier l'affichage correct de tous les composants
+- Tester les interactions (hover, click, focus)
+- Vérifier les messages d'erreur et validations
+
+## 🐛 Débogage
+
+### Console du Navigateur
+- Ouvrir les outils de développement (F12)
+- Surveiller les erreurs dans la console
+- Vérifier les requêtes réseau dans l'onglet "Network"
+
+### Problèmes Courants
+1. **Module non trouvé**: Vérifier les imports dans les fichiers
+2. **Route non trouvée**: Confirmer la configuration dans router/index.tsx
+3. **Styles manquants**: Vérifier les classes Tailwind CSS
+
+## 📊 Checklist de Validation
+
+- [ ] Connexion admin/partenaire fonctionnelle
+- [ ] Navigation entre les pages fluide
+- [ ] Création de formats de rapport
+- [ ] Création de projets
+- [ ] Affichage des tableaux de données
+- [ ] Mode sombre/clair opérationnel
+- [ ] Interface responsive
+- [ ] Assistant IA accessible
+- [ ] Paramètres modifiables
+- [ ] Persistance des données
+
+## 🚀 Déploiement
+
+### Build de Production
+```bash
+npm run build
+```
+Les fichiers générés seront dans le dossier `dist/`
+
+### Test en Production
+```bash
+npm run preview
+```
+Pour tester le build de production localement
+
+---
+
+## 💡 Notes Importantes
+
+1. **Backend Mock**: Le backend inclus est une simulation. En production, il faudra une vraie base de données.
+2. **Données Test**: Les données sont sauvegardées en localStorage pour les besoins du test.
+3. **Performance**: Pour des volumes importants, prévoir une optimisation et pagination.
+4. **Sécurité**: En production, ajouter une authentification robuste et validation des entrées.
+
+Pour toute question ou problème, consulter la console du navigateur pour les messages d'erreur détaillés.
